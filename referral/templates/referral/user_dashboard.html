@@ -1,0 +1,670 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Refer | Win Rewards by Referring Friends</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              darkTeal: 'rgb(5, 96, 92)',
+              brightGreen: 'rgb(48, 192, 115)',
+              aquaGreen: 'rgb(3, 167, 149)',
+              colorOne: '#007a33',
+              colorTwo: '#00cc66',
+              colorThree: '#121212',
+            }
+          }
+        }
+      }
+    </script>
+
+
+<style>
+      /* === Custom Animations === */
+      @keyframes floatCoin {
+      0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 0.5;
+      }
+      50% {
+        transform: translateY(-20px) rotate(180deg);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(0) rotate(360deg);
+        opacity: 0.5;
+      }
+    }
+
+    .coin-float {
+      animation: floatCoin 6s ease-in-out infinite;
+    }
+
+    @keyframes slideFadeInLeft {
+      0% {
+        opacity: 0;
+        transform: translateX(-30px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    .animate-slideFadeInLeft {
+      animation: slideFadeInLeft 1.2s ease-out;
+    }
+
+    @keyframes slideFadeInLeft {
+      0% {
+        opacity: 0;
+        transform: translateX(-50px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    @keyframes bounceIn {
+      0% {
+        transform: scale(0.6);
+        opacity: 0;
+      }
+      60% {
+        transform: scale(1.05);
+        opacity: 1;
+      }
+      100% {
+        transform: scale(1);
+      }
+    }
+
+    @keyframes slideUp {
+      0% {
+        opacity: 0;
+        transform: translateY(50px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes pulseGlow {
+      0%, 100% {
+        box-shadow: 0 0 0 0 rgba(255,165,0, 0.4);
+      }
+      50% {
+        box-shadow: 0 0 0 10px rgba(255,165,0, 0);
+      }
+    }
+
+    .animate-slideFadeInLeft {
+      animation: slideFadeInLeft 1s ease-out forwards;
+    }
+
+    .animate-bounceIn {
+      animation: bounceIn 0.8s ease-out forwards;
+    }
+
+    .animate-slideUp {
+      animation: slideUp 1s ease-out forwards;
+    }
+
+    .animate-pulseGlow {
+      animation: pulseGlow 2s infinite;
+    }
+
+/* leaderboard modal */
+  @keyframes fadeInUp {
+    0% {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .animate-fadeInUp {
+    animation: fadeInUp 0.5s ease-out both;
+  }
+
+/*profile */
+@keyframes pulseGlow {
+  0%, 100% {
+    box-shadow: 0 0 0px rgba(255, 255, 255, 0.1);
+  }
+  50% {
+    box-shadow: 0 0 12px rgba(255, 255, 255, 0.3);
+  }
+}
+.animate-pulseGlow {
+  animation: pulseGlow 2s infinite ease-in-out;
+}
+
+/* profile modal */
+@keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    .fade-in-up {
+      animation: fadeInUp 0.4s ease-out;
+    }
+    .glass-card {
+      backdrop-filter: blur(10px);
+      background-color: rgba(31, 41, 55, 0.6); /* tailwind gray-800 with opacity */
+    }
+
+
+/* share button animation */
+@keyframes bounceUp {
+  0% {
+    transform: scale(0.5) translateY(20px);
+    opacity: 0;
+  }
+  60% {
+    transform: scale(1.05) translateY(-5px);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1) translateY(0);
+  }
+}
+
+@keyframes bounceOut {
+  0% {
+    transform: scale(1) translateY(0);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(0.5) translateY(20px);
+    opacity: 0;
+  }
+}
+
+.animate-bounceUp {
+  animation: bounceUp 0.4s ease-out;
+}
+
+.animate-bounceOut {
+  animation: bounceOut 0.4s ease-in;
+}
+
+/*africanism decoration */
+@keyframes pulse-slow {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.05); opacity: 0.95; }
+}
+
+.animate-pulse-slow {
+  animation: pulse-slow 6s ease-in-out infinite;
+}
+
+
+  @keyframes popIn {
+    0% {
+      transform: scale(0.9);
+      opacity: 0.8;
+    }
+    50% {
+      transform: scale(1.1);
+      opacity: 1;
+    }
+    100% {
+      transform: scale(1);
+      opacity: 1;
+    }
+  }
+
+  .animate-popIn {
+    animation: popIn 0.6s ease-out forwards;
+  }
+
+  .animate-pulseRepeat {
+    animation: pulse 2s infinite;
+  }
+
+  /*earned points animation */
+  @keyframes popIn {
+      0% {
+        transform: scale(0.9);
+        opacity: 0.8;
+      }
+      50% {
+        transform: scale(1.1);
+        opacity: 1;
+      }
+      100% {
+        transform: scale(1);
+        opacity: 1;
+      }
+    }
+
+    .animate-popIn {
+      animation: popIn 0.6s ease-out forwards;
+    }
+
+    .fade-slide-up {
+      animation: fadeSlideUp 1s ease-out forwards, fadeOut 1s ease-in 3s forwards;
+    }
+
+    @keyframes fadeSlideUp {
+      0% {
+        transform: translateY(50px);
+        opacity: 0;
+      }
+      100% {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
+    @keyframes fadeOut {
+      to {
+        opacity: 0;
+        transform: translateY(-20px);
+      }
+    }
+/*points earned animation*/
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fadeInUp {
+  animation: fadeInUp 0.8s ease-out forwards;
+}
+
+@keyframes scaleIn {
+  from {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.animate-scaleIn {
+  animation: scaleIn 0.6s ease-out forwards;
+}
+
+/*setting modal design */
+@keyframes scaleFadeIn {
+  0% {
+    transform: scale(0.9);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+.animate-scaleFadeIn {
+  animation: scaleFadeIn 0.3s ease-out forwards;
+}
+
+</style>
+
+</head>
+<!--<body class="relative bg-gradient-to-br from-black via-gray-900 to-gray-950 text-white min-h-screen ">-->
+<body class="relative bg-gradient-to-br from-gray-500 via-gray-600 to-gray-950 text-white min-h-screen ">
+
+
+  <!-- Main content wrapper -->
+  <div class="relative z-10 w-full px-6 md:px-20 lg:px-32 xl:px-48 py-16">
+
+<!-- User Profile + Settings -->
+<div class="flex flex-col sm:flex-row gap-4 sm:gap-8 mb-8">
+  <!-- User Profile -->
+  <div class="flex justify-between items-center bg-colorTwo border border-aquaGreen rounded-xl p-5 shadow-lg w-full animate-slideFadeInLeft">
+    <div class="flex items-center gap-4 ">
+      <img src="https://img.icons8.com/color/96/user-male-circle--v1.png" alt="User Avatar"
+        class="w-16 h-16 rounded-full shadow-lg bg-colorThree">
+      <div>
+        <h3 id="username" class="text-2xl font-semibold text-white">{{ user_data.username }}</h3>
+        <p id="userEmail" class="text-lg text-colorThree font-semibold">{{ user_data.contact | truncatechars:8}}</p>
+      </div>
+    </div>
+
+    <!-- Hamburger Icon -->
+    <button onclick="openSettings()" class="text-white hover:text-white transition sm:ml-4">
+      <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+      </svg>
+    </button>
+  </div>
+</div>
+
+<!-- Modal Overlay -->
+<div id="settingsModal" class="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 hidden items-center justify-center">
+  <!-- Modal Content -->
+  <div class="bg-darkTeal border border-aquaGreen text-white p-6 rounded-2xl shadow-2xl w-80 relative animate-scaleFadeIn space-y-5">
+
+    <!-- Close Button -->
+    <button onclick="closeSettings()" class="absolute top-3 right-3 text-white hover:text-red-500 transition text-4xl font-bold">&times;</button>
+
+    <!-- Title -->
+    <h2 class="text-xl font-bold text-center mb-4">⚙️ Account Settings</h2>
+
+    <!-- Logout -->
+    <form action="{% url 'logout' %}" method="POST">
+      {% csrf_token %}
+      <button type="submit"
+        class="w-full py-2 bg-red-600 text-white font-semibold rounded-lg hover:bg-red-500 transition duration-200">
+        🚪 Logout
+      </button>
+    </form>
+
+    <!-- Divider -->
+    <div class="border-t border-aquaGreen opacity-40 my-3"></div>
+
+    <!-- Delete Account -->
+    <form action="{% url 'delete' %}" method="POST"
+      onsubmit="return confirm('Are you sure you want to delete your account? This action cannot be undone.');">
+      {% csrf_token %}
+      <button type="submit"
+        class="w-full py-2 bg-gradient-to-r from-red-700 to-red-500 text-white font-bold rounded-lg hover:from-red-800 hover:to-red-600 transition duration-200">
+        🗑️ Delete Account
+      </button>
+    </form>
+
+  </div>
+
+<script>
+  function openSettings() {
+    document.getElementById('settingsModal').classList.remove('hidden');
+    document.getElementById('settingsModal').classList.add('flex');
+  }
+
+  function closeSettings() {
+    document.getElementById('settingsModal').classList.remove('flex');
+    document.getElementById('settingsModal').classList.add('hidden');
+  }
+</script>
+ 
+</div>
+
+
+
+
+<!-- Header Section: Invite Friends + Rank/Leaderboard -->
+<div class="mb-8 animate-slideFadeInLeft">
+  <div class="w-full flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+
+    <!-- Invite Friends Heading -->
+    <h1 class="text-base sm:text-4xl font-bold text-white text-center sm:text-left">
+      INVITE FRIENDS
+    </h1>
+
+    <!-- Right Side: Referrals | Leaderboard | Rank -->
+    <div class="flex flex-row items-center justify-center sm:justify-end gap-4 sm:gap-6 w-full sm:w-auto">
+
+      <!-- Referral Count -->
+      <div class="text-center sm:text-center">
+        <p class="text-xs sm:text-sm text-gray-300">Referrals</p>
+        <p id="referralCount" class="text-base sm:text-xl font-bold text-green-400">{{ user_data.direct_referrals }}</p>
+      </div>
+
+      <!-- Leaderboard Button -->
+      <button onclick="toggleLeaderboardModal()"
+        class="text-xs sm:text-base bg-colorTwo hover:bg-yellow-400 text-white font-semibold py-2 px-4 sm:px-6 rounded-lg shadow transition-all duration-300 flex items-center gap-2">
+        <img src="https://img.icons8.com/emoji/96/trophy-emoji.png" alt="Leaderboard Icon" class="w-4 h-4 sm:w-5 sm:h-5 text-white-400" />
+        Leaderboard
+      </button>
+
+      <!-- Rank Info -->
+      <div class="text-center sm:text-right">
+        <p class="text-xs sm:text-sm text-gray-300">Rank:</p>
+        <p id="userRank" class="text-base sm:text-xl font-bold text-yellow-400">#{{ user_data.user_rank }}</p>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+        <!-- Banner -->
+        <div
+            class="flex flex-col md:flex-row items-center justify-between bg-gradient-to-r from-colorOne to-colorTwo p-6 rounded-2xl shadow-xl mb-10 animate-slideFadeInLeft">
+            <div class="text-center md:text-left mb-4 md:mb-0">
+                <h2 class="text-xl md:text-2xl font-bold">Invite your friends and get rewarded!</h2>
+                <p class="text-gray-200 mt-2">Enjoy your rewards with your friends through our rewards points system!
+                </p>
+            </div>
+            <img src="https://img.icons8.com/emoji/96/trophy-emoji.png" alt="Trophy" class="w-20 h-20" />
+
+            <!-- Floating Coins -->
+            <img src="https://img.icons8.com/emoji/48/coin-emoji.png"
+                class="coin-float absolute top-4 left-[10%] w-6 h-6" style="animation-delay: 0s;" />
+            <img src="https://img.icons8.com/emoji/48/coin-emoji.png"
+                class="coin-float absolute bottom-6 right-[15%] w-8 h-8" style="animation-delay: 1s;" />
+            <img src="https://img.icons8.com/emoji/48/coin-emoji.png"
+                class="coin-float absolute top-[15%] right-[5%] w-5 h-5" style="animation-delay: 2s;" />
+        </div>
+
+
+
+<!-- Stats Section -->
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-10">
+
+  <!-- Referral Code Box -->
+  <div class="bg-colorTwo rounded-xl p-8 shadow-lg text-center animate-bounceIn" style="animation-delay: 0.2s;">
+
+    <!-- Heading -->
+    <p class="text-2xl sm:text-3xl lg:text-3xl font-bold text-white mb-6">YOUR REFERRAL CODE</p>
+
+<!-- Referral Code Centered -->
+<div class="flex justify-center items-center mb-6">
+  <span id="referralCode"
+        class="text-white text-3xl sm:text-4xl font-mono font-bold tracking-widest 
+               border border-white px-8 py-2 rounded-lg bg-colorOne shadow-md 
+               hover:scale-105 transition duration-300 ease-in-out">
+               {{ user_data.referral_code }}
+  </span>
+</div>
+
+
+
+
+<!-- Buttons Row -->
+<div class="flex justify-center items-center gap-4 flex-nowrap flex-row overflow-x-auto whitespace-nowrap">
+
+  <!-- Copy Code Button -->
+  <button id="copyCodeBtn"
+          onclick="copyToClipboard('referralCode', 'copyCodeBtn', 'Copy Code')"
+          class="bg-white text-purple-700 font-semibold py-2 px-5 rounded-lg inline-flex items-center gap-2 shadow-md hover:shadow-lg hover: duration-300 ease-in-out whitespace-nowrap">
+    <img src="https://img.icons8.com/material-rounded/24/copy.png" class="w-5 h-5" alt="Copy Icon" />
+    <span class="whitespace-nowrap">Copy Code</span>
+  </button>
+
+  <!-- Copy as Link Button -->
+  <button id="copyLinkBtn"
+          onclick="copyReferralLink('copyLinkBtn', 'Copy as Link')"
+          class="bg-white text-purple-700 font-semibold py-2 px-5 rounded-lg inline-flex items-center gap-2 shadow-md hover:shadow-lg hover:bg-gray-100 hover: duration-300 ease-in-out whitespace-nowrap">
+    <img src="https://img.icons8.com/material-rounded/24/link.png" class="w-5 h-5" alt="Link Icon" />
+    <span class="whitespace-nowrap">Copy as Link</span>
+  </button>
+
+</div>
+
+</div>
+
+
+
+<!-- Referral Points Box -->
+<div class="relative bg-colorTwo rounded-2xl p-8 shadow-2xl flex flex-col items-center text-center min-h-[200px] w-full max-w-md mx-auto animate-fadeInUp" style="animation-delay: 0.2s;">
+  
+  <!-- Title -->
+  <p class="text-white text-xl sm:text-2xl lg:text-3xl font-bold mb-6 tracking-wide">
+    POINTS EARNED
+  </p>
+
+<!-- Stylish Rectangular Box for Points -->
+<div class="bg-white text-colorTwo px-8 py-2 sm:py-3 rounded-lg shadow-md border border-colorThree animate-scaleIn transition-all duration-500 ease-in-out">
+  <h3 id="referralPoints" class="text-[4rem] sm:text-[5rem] lg:text-[6rem] font-extrabold tracking-wide"
+      style="font-family: 'Bebas Neue', sans-serif; line-height: 1;">
+    {{ user_data.total_points }}
+  </h3>
+</div>
+<p class="text-white text-lg sm:text-xl font-semibold mt-12 mb-6 animate-fadeInUp tracking-wide">
+  Refer to earn more points <span class="inline-block animate-wiggle">🥳</span>
+</p>
+
+
+  <!-- Congrats Message -->
+  <div id="congratsMessage" class="fixed bottom-10 transform bg-colorThree text-white px-6 py-3 rounded-lg text-lg font-semibold shadow-lg hidden">
+    🎉 Congratulations! You've earned points!
+  </div>
+</div>
+
+
+
+
+
+<script>
+  // Show the congratulations message
+  const congrats = document.getElementById('congratsMessage');
+  congrats.classList.remove('hidden');
+  congrats.classList.add('fade-slide-up');
+  congrats.classList.add('animate-bounceOut');
+
+  // Hide it after some assigned seconds
+  setTimeout(() => {
+    congrats.classList.add('hidden');
+  }, 3000);
+</script>
+
+
+
+</div>
+
+
+
+<!-- Share Section -->
+<div class="flex flex-col items-center mt-6 relative">
+
+    <!-- Social Icons (Initially Hidden, Appear Above Share Button) -->
+    <div id="socialIcons"
+        class="absolute bottom-[100%] mb-4 hidden flex justify-center gap-4 animate-bounceOut transition-all duration-500">
+
+        <!-- Facebook -->
+        <a href="#"
+           class="bg-blue-600 text-white p-3 rounded-full shadow hover:scale-110 transition-transform duration-300">
+            <svg class="w-6 h-6 fill-current" viewBox="0 0 24 24">
+                <path d="M22 12A10 10 0 1 0 10.9 21.9v-6.2h-2.3v-2.5h2.3v-1.9c0-2.3 1.4-3.6 3.5-3.6.7 0 1.4.1 1.4.1v2.3h-1.3c-1.3 0-1.6.8-1.6 1.6v1.5h2.7l-.4 2.5h-2.3v6.2A10 10 0 0 0 22 12z"/>
+            </svg>
+        </a>
+
+        <!-- WhatsApp -->
+        <a href="#"
+           class="bg-green-500 text-white p-3 rounded-full shadow hover:scale-110 transition-transform duration-300">
+            <svg class="w-6 h-6 fill-current" viewBox="0 0 24 24">
+                <path d="M20 4a10 10 0 0 0-17 11.6L2 22l6.6-1.9A10 10 0 0 0 20 4zm-4.3 12.3c-.2.4-.9.7-1.3.8-.3.1-.7.1-1.1 0-1.3-.2-3.4-1.5-4.5-3.2-.3-.5-.6-1.1-.5-1.5.1-.3.4-.5.7-.7l.6-.3c.2-.1.4-.2.5.1l.7 1c.2.3.3.4.2.7l-.3.6c-.1.2 0 .4.1.6.5.7 1.3 1.5 2.3 1.8.2.1.4.1.6-.1l.4-.4c.1-.2.3-.2.5-.1l1.1.6c.1 0 .2.2.1.5z"/>
+            </svg>
+        </a>
+
+        <!-- Twitter -->
+        <a href="#"
+           class="bg-blue-400 text-white p-3 rounded-full shadow hover:scale-110 transition-transform duration-300">
+            <svg class="w-6 h-6 fill-current" viewBox="0 0 24 24">
+                <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53A4.48 4.48 0 0 0 22.4 1s-2 .95-3.25 1.13a4.52 4.52 0 0 0-7.72 4.12A12.94 12.94 0 0 1 3.1 2.1a4.52 4.52 0 0 0 1.4 6A4.41 4.41 0 0 1 2.8 7.1v.06a4.52 4.52 0 0 0 3.64 4.43 4.52 4.52 0 0 1-2.04.08 4.53 4.53 0 0 0 4.22 3.13A9.06 9.06 0 0 1 2 19.54a12.8 12.8 0 0 0 6.95 2.04c8.34 0 12.9-6.91 12.9-12.9 0-.2 0-.4-.02-.6A9.22 9.22 0 0 0 23 3z"/>
+            </svg>
+        </a>
+    </div>
+
+    <!-- Share Button -->
+    <button onclick="toggleShareIcons()"
+        class="bg-gradient-to-r from-yellow-400 to-orange-500 text-black font-bold py-3 px-20 rounded-full shadow hover:scale-105 transition-transform duration-300 animate-pulseGlow">
+        Share
+    </button>
+
+</div>
+
+
+
+        <!-- Leaderboard Modal -->
+        <div id="leaderboardModal"
+            class="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50 hidden">
+            <div
+                class="bg-gradient-to-br from-gray-900 via-gray-800 to-black rounded-2xl w-full max-w-xl mx-auto p-8 relative shadow-2xl animate-fadeInUp">
+                <!-- Close Button -->
+                <button onclick="toggleLeaderboardModal()"
+                    class="absolute top-3 right-4 text-white text-2xl hover:scale-125 transition-transform">&times;</button>
+
+                <!-- Header -->
+                <div class="flex items-center justify-center gap-2 mb-6">
+                    <img src="https://img.icons8.com/emoji/48/trophy-emoji.png" class="w-8 h-8" />
+                    <h2 class="text-3xl font-extrabold text-yellow-400 tracking-wider">Top Referrers</h2>
+                    <img src="https://img.icons8.com/emoji/48/party-popper.png" class="w-8 h-8" />
+                </div>
+
+                <!-- Leaderboard Table -->
+                <div class="overflow-x-auto rounded-lg border border-gray-700">
+                    <table class="min-w-full table-auto">
+                        <thead class="bg-colorOne text-white">
+                            <tr>
+                                <th class="py-3 px-4 text-left">🏅 Rank</th>
+                                <th class="py-3 px-4 text-left">👤 Name</th>
+                                <th class="py-3 px-4 text-left">📨 Referrals</th>
+                            </tr>
+                        </thead>
+                        
+                        <tbody id="leaderboardBody" class="text-white bg-gray-900">
+                          {% if leaders %}
+                            {% for user in leaders %}
+                            <tr>
+                                <td class="py-3 px-4">#{{ forloop.counter }}</td>
+                                <td class="py-3 px-4">{{ user.username }}</td>
+                                <td class="py-3 px-4">{{ user.total_points }} pts</td>
+                            </tr>
+                            {% endfor%}
+                          {% else %}
+                          <tr><td colspan="3" class="text-center text-gray-400 py-4">No data available</td></tr>
+                            
+                          {% endif%}
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Footer -->
+                <div class="mt-6 text-center">
+                    <p class="text-sm text-gray-400">Keep inviting to climb the leaderboard! 🎯</p>
+                </div>
+            </div>
+        </div>
+
+
+
+    </div>
+<script src="{% static 'js/dashboard2.js' %}"></script>
+</body>
+
+</html>

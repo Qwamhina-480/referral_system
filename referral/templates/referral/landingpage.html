@@ -1,0 +1,292 @@
+{% load static%}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ref3rral - Referral Platform</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Space Grotesk', sans-serif;
+            background-color: #0f0e17;
+            color: #fffffe;
+            overflow-x: hidden;
+        }
+
+        .gradient-text {
+            background: linear-gradient(90deg, #54ff3d 0%, #41ff97 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .card-gradient {
+            background: linear-gradient(135deg, rgba(23, 24, 41, 0.8) 0%, rgba(37, 39, 68, 0.6) 100%);
+            backdrop-filter: blur(10px);
+        }
+
+        #canvas3d {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+
+        .glass-effect {
+            background: rgba(15, 14, 23, 0.7);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .ref-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 25px 50px -12px rgba(61, 255, 87, 0.3);
+        }
+
+        .rotate-animation {
+            animation: rotate 30s linear infinite;
+        }
+
+        @keyframes rotate {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+        .nav-logo{
+            background-size: cover;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 3D Canvas Background -->
+    <div id="canvas3d"></div>
+
+    <div class="relative min-h-screen">
+        <!-- Navigation -->
+        <nav class="glass-effect px-6 py-4 rounded-full max-w-6xl mx-auto mt-4 flex items-center justify-between">
+            <div class="flex items-center space-x-2">
+                <img src="{% static 'images/logofull.png' %}"
+                    alt="logo"
+                    class="w-10 h-10 nav-logo" >
+                <span class="text-xl font-bold gradient-text">Ref3rral</span>
+            </div>
+            <div class="hidden md:flex space-x-8">
+                <a href="#home" class="hover:text-[#54ff3d] transition">Home</a>
+                <a href="#howitworks" class="hover:text-[#54ff3d] transition">How It Works</a>
+                <a href="#rewards" class="hover:text-[#54ff3d] transition">Rewards System</a>
+            </div>
+            <a href="{% url 'login' %}">
+                <button
+                class="bg-gradient-to-r from-[#54ff3d] to-[#41ff97] px-6 py-2 rounded-full font-medium hover:opacity-90 transition">
+                Login
+            </button>
+            </a>
+        </nav>
+
+        <!-- Hero Section -->
+        <section class="container mx-auto px-6 pt-24 pb-32" id="home">
+            <div class="flex flex-col md:flex-row items-center">
+                <div class="md:w-1/2 mb-12 md:mb-0">
+                    <h1 class="text-5xl md:text-6xl font-extrabold leading-tight mb-6">
+                        Earn <span class="gradient-text">Many Rewards</span> <br>
+                        With Every Referral
+                    </h1>
+                    <p class="text-xl text-gray-300 mb-8 max-w-lg">
+                        Join the referral revolution. Invite friends and get rewarded instantly with our
+                        easy to use platform.
+                    </p>
+                    <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
+                        <a href="{% url 'signup' %}">
+                            <button
+                            class="bg-gradient-to-r from-[#54ff3d] to-[#41ff97] px-8 py-4 rounded-full font-semibold text-lg hover:opacity-90 transition">
+                            Get Started
+                        </button>
+                        </a>
+                        <a href="#howitworks"
+                            class="glass-effect px-8 py-4 rounded-full font-semibold text-lg border border-[#54ff3d] hover:bg-[#3d67ff]/10 transition">
+                            How It Works
+                        </a>
+                    </div>
+                </div>
+                <div class="md:w-1/2 flex justify-center">
+                    <div class="relative w-full max-w-lg">
+                        <img src="{% static 'images/logofull.png'%}"
+                            alt="3D rotating Web3 referral tokens visualization with glowing particles and ethereum-inspired design"
+                            class="w-full h-auto rotate-animation">
+                        <div
+                            class="absolute -bottom-10 -right-10 bg-[#54ff3d] w-32 h-32 rounded-full blur-[80px] opacity-50">
+                        </div>
+                        <div
+                            class="absolute -top-10 -left-10 bg-[#54ff3d] w-32 h-32 rounded-full blur-[80px] opacity-50">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Stats Section -->
+        <section class="container mx-auto px-6 py-16">
+            <div class="card-gradient p-8 rounded-3xl">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+                    <div class="p-6">
+                        <h3 class="text-5xl font-bold gradient-text mb-4">$12.5M+</h3>
+                        <p class="text-gray-300 text-lg">Total Rewards Distributed</p>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-5xl font-bold gradient-text mb-4">150K+</h3>
+                        <p class="text-gray-300 text-lg">Active Referrals</p>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-5xl font-bold gradient-text mb-4">1M+</h3>
+                        <p class="text-gray-300 text-lg">Active Users</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- How It Works Section -->
+        <section class="container mx-auto px-6 py-16 " id="howitworks">
+            <h2 class="text-4xl font-bold text-center mb-16">How <span class="gradient-text">Ref3rral</span> Works</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="card-gradient p-8 rounded-2xl hover:border border-[#3d67ff]/30 transition">
+                    <div class="w-16 h-16 rounded-full bg-[#3d67ff]/20 flex items-center justify-center mb-6">
+                        <span class="text-2xl gradient-text font-bold">1</span>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4">Sign Up</h3>
+                    <p class="text-gray-300">New Users are assigned a unique referral code upon successful sign up.</p>
+                </div>
+                <div class="card-gradient p-8 rounded-2xl hover:border border-[#3d67ff]/30 transition">
+                    <div class="w-16 h-16 rounded-full bg-[#3d67ff]/20 flex items-center justify-center mb-6">
+                        <span class="text-2xl gradient-text font-bold">2</span>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4">Share Referral Link or code</h3>
+                    <p class="text-gray-300">Invite friends using your unique referral link or code.</p>
+                </div>
+                <div class="card-gradient p-8 rounded-2xl hover:border border-[#3d67ff]/30 transition">
+                    <div class="w-16 h-16 rounded-full bg-[#3d67ff]/20 flex items-center justify-center mb-6">
+                        <span class="text-2xl gradient-text font-bold">3</span>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4">Earn Rewards</h3>
+                    <p class="text-gray-300">Get instant reward points when your referrals complete actions. This points can later be redeemed to earn gifts or coupons</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Referral Program Section -->
+        <section class="container mx-auto px-6 py-16" id="rewards">
+            <div class="card-gradient p-8 md:p-12 rounded-3xl">
+                <div class="flex flex-col md:flex-row items-center">
+                    <div class="md:w-1/2 mb-8 md:mb-0">
+                        <h2 class="text-3xl md:text-4xl font-bold mb-6">Multi-Level <br><span
+                                class="gradient-text">Referral Program</span></h2>
+                        <p class="text-gray-300 mb-8 max-w-lg">
+                            Earn not just from your direct referrals, but also when they invite their friends. Our smart
+                            contracts automatically distribute rewards across your network.
+                        </p>
+                        <div class="space-y-4 mb-8">
+                            <div class="flex items-center">
+                                <div class="w-8 h-8 rounded-full bg-[#3d67ff] flex items-center justify-center mr-4">
+                                    <span class="text-white">1</span>
+                                </div>
+                                <span class="text-lg">Gain 10 points on each direct referral</span>
+                            </div>
+                            <div class="flex items-center">
+                                <div class="w-8 h-8 rounded-full bg-[#41caff] flex items-center justify-center mr-4">
+                                    <span class="text-white">2</span>
+                                </div>
+                                <span class="text-lg">5 Points when your referral refers another user</span>
+                            </div>
+                            <div class="flex items-center">
+                                <div class="w-8 h-8 rounded-full bg-[#8a3dff] flex items-center justify-center mr-4">
+                                    <span class="text-white">3</span>
+                                </div>
+                                <span class="text-lg">You gain 2 points when you sign up using a referral code</span>
+                            </div>
+                        </div>
+                        <a href="{% url 'signup' %}">
+                            <button
+                            class="bg-gradient-to-r from-[#54ff3d] to-[#41ff97] px-8 py-3 rounded-full font-semibold hover:opacity-90 transition">
+                            Start Earning Today
+                        </button>
+                        </a>
+                    </div>
+                    <div class="md:w-1/2 flex justify-center">
+                        <div class="relative">
+                            <img src="{% static 'images/logofull.png' %}"
+                                alt="Interactive Web3 referral network visualization showing multiple levels with glowing connection lines"
+                                class="w-full h-auto">
+                            <div
+                                class="absolute -bottom-8 -right-8 bg-[#3d67ff] w-48 h-48 rounded-full blur-[100px] opacity-30">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="container mx-auto px-6 py-32 text-center">
+            <h2 class="text-4xl md:text-5xl font-bold mb-8">Ready to Boost Your<br><span class="gradient-text">Online
+                    Earnings?</span></h2>
+            <p class="text-xl text-gray-300 max-w-2xl mx-auto mb-12">
+                Join thousands of users already earning passive income through our referral network.
+            </p>
+            <a href="{% url 'signup' %}">
+                <button
+                class="bg-gradient-to-r from-[#54ff3d] to-[#41ff97] px-10 py-4 rounded-full font-semibold text-lg hover:opacity-90 transition">
+                Sign Up and Start Earning Today
+            </button>
+            </a>
+        </section>
+
+        <!-- Footer -->
+        <footer class="border-t border-gray-800">
+            <div class="container mx-auto px-6 py-12">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+                    <div>
+                        <div class="flex items-center space-x-2 mb-6">
+                            <img src="{% static 'images/logofull.png' %}" alt="Ref3rral logo" class="w-10 h-10">
+                            <span class="text-xl font-bold gradient-text">Ref3rral</span>
+                        </div>
+                        <p class="text-gray-400">
+                            The future of referral marketing powered by bytant Innovative Group technology.
+                        </p>
+                    </div>
+                    <div>
+
+                    <div>
+                        <h3 class="text-lg font-semibold mb-4">Connect with the Makers and Managers</h3>
+                        <div class="flex space-x-4 mb-6">
+                            <a href="#"
+                                class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-[#3d67ff] transition">
+                                <img src="{% static 'images/x.webp' %}" alt="Twitter/X icon">
+                            </a>
+
+                            <a href="#"
+                                class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-[#3d67ff] transition">
+                                <img src="{% static 'images/OIP.webp' %}">
+                            </a>
+
+                            <a href="#"
+                                class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-[#3d67ff] transition">
+                                <img src="{% static 'images/instgram.webp' %}">
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+</body>                            

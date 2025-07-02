@@ -1,0 +1,299 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title> Signup</title>
+  <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      min-height: 100vh;
+      background: linear-gradient(0deg, transparent, rgb(178, 238, 172), rgb(185, 250, 247));
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 1rem;
+    }
+
+    .container {
+      position: relative;
+      display: flex;
+      flex-wrap: wrap;
+      width: 100%;
+      max-width: 900px;
+      min-height: 520px;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 0 40px #00aa44, 0 0 80px #00aa44, 0 0 120px #00aa44;
+      z-index: 1;
+      animation: pulseGlow 3s infinite ease-in-out;
+    }
+
+    @keyframes pulseGlow {
+      0% { box-shadow: 0 0 30px #007a33, 0 0 60px #007a33, 0 0 90px #007a33; }
+      50% { box-shadow: 0 0 50px #00cc66, 0 0 100px #00cc66, 0 0 150px #00cc66; }
+      100% { box-shadow: 0 0 30px #007a33, 0 0 60px #007a33, 0 0 90px #007a33; }
+    }
+
+    .container::before, .container::after {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 750px;
+      height: 500px;
+      background: linear-gradient(0deg, transparent, #1b0238, #7429cc);
+      transform-origin: bottom right;
+      animation: rotate 6s linear infinite;
+      z-index: -1;
+    }
+
+    .container::after {
+      animation-delay: -3s;
+    }
+
+    @keyframes rotate {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    .left {
+      flex: 1 1 50%;
+      background: linear-gradient(135deg, #64be5c, #38aba6);
+      padding: 2rem;
+      color: white;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      clip-path: polygon(0 0, 200% 0, 85% 150%, 0% 100%);
+      text-align: center;
+    }
+
+    .left img {
+      width: 400px;
+      max-width: 100%;
+      margin-bottom: 1rem;
+    }
+
+    .left h1 {
+      font-size: 2rem;
+      font-weight: bold;
+    }
+
+    .left p {
+      margin-top: 1rem;
+      font-size: 1rem;
+    }
+
+    .right {
+      flex: 1 1 50%;
+      background: #121212;
+      padding: 2rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      color: white;
+    }
+
+    .form-title {
+      font-size: 1.8rem;
+      margin-bottom: 1.5rem;
+      font-weight: bold;
+      text-align: center;
+    }
+
+    .input-box {
+      position: relative;
+      margin-bottom: 1.5rem;
+    }
+
+    .input-box input {
+      width: 100%;
+      padding: 0.75rem 2.5rem 0.75rem 1rem;
+      background: transparent;
+      border: none;
+      border-bottom: 2px solid #555;
+      color: white;
+      font-size: 1rem;
+      outline: none;
+    }
+
+    .input-box i {
+      position: absolute;
+      top: 50%;
+      right: 1rem;
+      transform: translateY(-50%);
+      color: #888;
+    }
+
+    .btn {
+      padding: 0.75rem;
+      width: 100%;
+      border: none;
+      border-radius: 30px;
+      background: linear-gradient(135deg, #64be5c, #38aba6);
+      color: white;
+      font-size: 1rem;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .btn:hover {
+      box-shadow: 0 0 10px #38aba6, 0 0 20px #64be5c;
+    }
+
+    .bottom-text {
+      text-align: center;
+      margin-top: 1rem;
+      color: #aaa;
+      font-size: 0.9rem;
+    }
+
+    .bottom-text a {
+      color: #f9f8fa;
+      text-decoration: none;
+      margin-left: 4px;
+      cursor: pointer;
+    }
+
+    .form-wrapper {
+      display: none;
+    }
+
+    .form-wrapper.active {
+      display: block;
+    }
+
+    @media (max-width: 768px) {
+      .left, .right {
+        flex: 1 1 100%;
+        clip-path: none;
+        padding: 2rem;
+      }
+
+      .container {
+        flex-direction: column;
+        height: auto;
+      }
+
+      .left h1 {
+        font-size: 1.8rem;
+      }
+
+      .form-title {
+        font-size: 1.5rem;
+      }
+
+      .left p {
+        font-size: 0.95rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .left img {
+        width: 100px;
+      }
+
+      .input-box input {
+        font-size: 0.9rem;
+      }
+
+      .btn {
+        font-size: 0.95rem;
+      }
+
+      .bottom-text {
+        font-size: 0.85rem;
+      }
+
+      .toggle-password {
+        cursor: pointer !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <div class="left">
+      <img src="{% static 'images/trophy.png' %}" alt="Trophy">
+      <h1>REFER AND EARN REWARDS</h1>
+      <p>Start earning points by referring your friends! Share your unique referral link, and watch your points grow. The more people you refer, the more rewards you unlock!</p>
+    </div>
+
+    <div class="right">
+      <div class="form-wrapper active" id="signupForm">
+        <div class="form-title">Sign Up</div>
+        <form method="post" action="{% url 'signup' %}">
+          {% csrf_token %}
+          <div class="input-box">
+            <input type="text" name="username" placeholder="Username" required >
+            <i class='bx bx-user'></i>
+          </div>
+          <div class="input-box">
+            <input type="text" name="contact" placeholder="Email or Phone" required >
+            <i class='bx bx-envelope'></i>
+          </div>
+          <div class="input-box">
+            <input type="password" id="password" name="password" placeholder="Password" minlength="6" required>
+            <i class='bx bx-show toggle-password absolute right-3 top-3 cursor-pointer' onclick="togglePassword()"></i>
+          </div>
+          <div class="input-box">
+            <input type="text" name="referral_code" placeholder="Referral Code  (Optional)" value="{{ referral_code}}" >
+          </div>
+          <button type="submit" class="btn">Sign Up</button>
+          {% if error %}
+            <div class="error">{{ error }}</div>
+          {% endif %}
+        </form>
+        <p class="bottom-text">Already have an account?<a href="{% url 'login' %}" class="text-indigo-600 font-medium">Log In</a>
+      </div>
+
+      
+    </div>
+  </div>
+
+  <script>
+    function toggleForm(form) {
+      const loginForm = document.getElementById("loginForm");
+      const signupForm = document.getElementById("signupForm");
+
+      if (form === 'login') {
+        loginForm.classList.add("active");
+        signupForm.classList.remove("active");
+      } else {
+        signupForm.classList.add("active");
+        loginForm.classList.remove("active");
+      }
+    }
+
+
+   // Password visibility option
+function togglePassword() {
+    const passwordInput = document.getElementById("password");
+    const toggleIcon = document.querySelector(".toggle-password");
+
+    if (passwordInput.type === "password") {
+      passwordInput.type = "text";
+      toggleIcon.classList.remove("bx-show");
+      toggleIcon.classList.add("bx-hide");
+    } else {
+      passwordInput.type = "password";
+      toggleIcon.classList.remove("bx-hide");
+      toggleIcon.classList.add("bx-show");
+    }
+  }
+
+  </script>
+</body>
+</html>

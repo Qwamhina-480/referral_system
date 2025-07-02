@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <style>
+        table { width: 100%; border-collapse: collapse; margin: 20px 0; }
+        th, td { padding: 10px; border: 1px solid #ddd; text-align: left; }
+        th { background-color: #f5f5f5; }
+    </style>
+</head>
+<body>
+    <h1>Admin Dashboard</h1>
+
+    <h2>Top 50 Users by Points</h2>
+    <table>
+        <tr>
+            <th>#</th>
+            <th>Username</th>
+            <th>Email</th>
+            <th>Referral Code</th>
+            <th>Referred By</th>
+            <th>Total Points</th>
+        </tr>
+        {% for user in users %}
+        <tr>
+            <td>{{ forloop.counter }}</td>
+            <td>{{ user.username }}</td>
+            <td>{{ user.email }}</td>
+            <td>{{ user.referral_code }}</td>
+            <td>{{ user.referrer.username  }}</td>
+            <td>{{ user.total_points }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <h2>All Rewards</h2>
+    <table>
+        <tr>
+            <th>User</th>
+            <th>Points</th>
+            <th>Reason</th>
+            <th>Date</th>
+        </tr>
+        {% for reward in rewards %}
+        <tr>
+            <td>{{ reward.user.username }}</td>
+            <td>{{ reward.points }}</td>
+            <td>{{ reward.reason }}</td>
+            <td>{{ reward.created_at|date:"Y-m-d H:i" }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    
+</body>
+</html>

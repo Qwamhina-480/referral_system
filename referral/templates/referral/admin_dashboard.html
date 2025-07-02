@@ -1,0 +1,212 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Admin Dashboard</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            darkTeal: 'rgb(5, 96, 92)',
+            brightGreen: 'rgb(48, 192, 115)',
+            aquaGreen: 'rgb(3, 167, 149)',
+            colorOne: '#007a33',
+            colorTwo: '#00cc66',
+            colorThree: '#121212',
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    .side-nav{
+      border-right-color:white ;
+      border-right-width: 1px;
+      border-right-style: solid;
+    }
+  </style>
+</head>
+<body class="bg-gradient-to-br from-[#0F0F0F] via-[#1a1a1a] to-black min-h-screen text-white flex flex-col lg:flex-row">
+
+  <!-- Sidebar -->
+  <aside class="w-full lg:w-64 text-white flex flex-col p-6 space-y-4 lg:min-h-screen side-nav">
+    <h1 class="text-2xl font-bold mb-6">Admin Dashboard</h1>
+    <button onclick="showSection('home')" class="text-left  hover:text-yellow-300">🏠 Home</button>
+    <button onclick="showSection('accounts')" class="text-left  hover:text-yellow-300">👥 View Accounts</button>
+    <button onclick="showSection('referrals')" class="text-left hover:text-yellow-300">🔁 All Referrals</button>
+    <button onclick="showSection('successful')" class="text-left hover:text-yellow-300">✅ All Rewards</button>
+    <button onclick="showSection('top')" class="text-left hover:text-yellow-300">🏆 Top Referrers</button>
+  </aside>
+
+  <!-- Main Content -->
+  <main class="flex-1 p-6 overflow-x-auto">
+
+    <!-- Home Section -->
+    <div id="home" class="section px-4 sm:px-8 py-8">
+      <h2 class="text-3xl sm:text-4xl font-extrabold mb-8">Welcome Admin 🎉</h2>
+
+      <!-- Total Users -->
+      <div class="bg-gradient-to-r from-colorOne to-colorTwo shadow-xl border border-cyan-500/30 rounded-2xl p-6 mb-10">
+        {% if user_count %}
+        <h3 class="uppercase font-bold text-black text-lg tracking-widest mb-3">Total Users</h3>
+        <p class="text-[4rem] sm:text-[5rem] font-bold leading-none tracking-tight text-white">
+          {{ user_count }}
+        </p>
+        {% endif %}
+      </div>
+
+      <!-- Top 3 Users -->
+<div class="flex flex-wrap justify-center gap-6 mt-6">
+  <!-- User 1 -->
+  <div class="w-full sm:w-1/3 bg-gradient-to-r from-purple-400 to-pink-500 border border-purple-700/40 rounded-xl p-6 shadow-lg text-white">
+    <h3 class="text-2xl font-bold mb-2">🥇 Rank #1</h3>
+    <p class="text-lg font-semibold">Username: <span class="text-white font-bold">AlphaUser</span></p>
+    <p class="text-md">Points: <span class="font-bold text-white">1280</span></p>
+  </div>
+
+  <!-- User 2 -->
+  <div class="w-full sm:w-1/3 bg-gradient-to-r from-blue-400 to-cyan-500 border border-blue-700/40 rounded-xl p-6 shadow-lg text-white">
+    <h3 class="text-2xl font-bold mb-2">🥈 Rank #2</h3>
+    <p class="text-lg font-semibold">Username: <span class="text-white font-bold">BetaUser</span></p>
+    <p class="text-md">Points: <span class="font-bold text-white">1120</span></p>
+  </div>
+
+  <!-- User 3 -->
+  <div class="w-full sm:w-1/3 bg-gradient-to-r from-yellow-400 to-orange-500 border border-yellow-700/40 rounded-xl p-6 shadow-lg text-white">
+    <h3 class="text-2xl font-bold mb-2">🥉 Rank #3</h3>
+    <p class="text-lg font-semibold">Username: <span class="text-white font-bold">GammaUser</span></p>
+    <p class="text-md">Points: <span class="font-bold text-white">980</span></p>
+  </div>
+</div>
+
+
+    </div>
+
+    <!-- Accounts -->
+    <div id="accounts" class="section hidden px-4 sm:px-8 py-8 bg-black">
+      <h2 class="text-2xl font-bold mb-4">All Created Accounts</h2>
+      <div class="overflow-x-auto bg-black rounded shadow p-4">
+        <table class="w-full font-semibold table-auto text-lg text-left">
+          <thead class="text-colorTwo font-semibold  border-b">
+            <tr>
+              <th>User</th>
+              <th>Email</th>
+              <th>Referral Code</th>
+              <th>Referred By</th>
+              <th>Created At</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for user in users %}
+            <tr class="border-t">
+              <td>{{ user.username }}</td>
+              <td>{{ user.email }}</td>
+              <td>{{ user.referral_code }}</td>
+              <td>{{ user.referrer.username|default:"-" }}</td>
+              <td>{{ user.created_at }}</td>
+            </tr>
+            {% empty %}
+            <tr>
+              <td colspan="5" class="py-4 px-6 text-center">No users found.</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Referrals -->
+    <div id="referrals" class="section hidden px-4 sm:px-8 py-8">
+      <h2 class="text-2xl font-bold mb-4">Referrals by Users</h2>
+      <div class="overflow-x-auto bg-black rounded shadow p-4">
+        <table class="w-full font-semibold table-auto text-lg text-left">
+          <thead class="text-colorTwo font-semibold border-b">
+            <tr>
+              <th>User</th>
+              <th>Referrals</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for user in users %}
+            <tr class="border-t">
+              <td>{{ user.username }}</td>
+              <td>{{ user.referral_count }}</td>
+            </tr>
+            {% empty %}
+            <tr>
+              <td colspan="2" class="py-4 px-6 text-center">No referrals found.</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Rewards -->
+    <div id="successful" class="section hidden px-4 sm:px-8 py-8">
+      <h2 class="text-2xl font-bold mb-4">All Rewards</h2>
+      <div class="overflow-x-auto bg-black rounded shadow p-4">
+        <table class="w-full table-auto font-semibold text-lg text-left">
+          <thead class="text-colorTwo font-bold border-b">
+            <tr>
+              <th>User</th>
+              <th>Points</th>
+              <th>Reason</th>
+              <th>Date</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for reward in rewards %}
+            <tr class="border-t">
+              <td>{{ reward.user.username }}</td>
+              <td>{{ reward.points }}</td>
+              <td>{{ reward.reason }}</td>
+              <td>{{ reward.created_at|date:"Y-m-d H:i" }}</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+
+
+    <!-- Top Referrers -->
+    <div id="top" class="section hidden px-4 sm:px-8 py-8">
+      <h2 class="text-2xl font-bold mb-4">Top Referrers</h2>
+      <div class="overflow-x-auto bg-black rounded shadow p-4">
+        <table class="w-full table-auto text-lg font-bold text-left">
+          <thead class="text-colorTwo font-bold border-b">
+            <tr>
+              <th>Name</th>
+              <th>Referrals</th>
+              <th>Points</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for user in users %}
+            <tr class="border-t">
+              <td>{{ user.username }}</td>
+              <td>{{ user.referral_count }}</td>
+              <td>{{ user.total_points|default:"0" }}</td>
+            </tr>
+            {% empty %}
+            <tr>
+              <td colspan="3" class="py-4 px-6 text-center">No users found.</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </main>
+
+  <script src="{% static 'js/admin.js' %}"></script>
+
+</body>
+</html>
